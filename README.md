@@ -100,14 +100,6 @@ Trabajar en equipo en un proyecto de desarrollo de software requiere una buena c
 
 
 
-
-
-
-
-
-
-
-
 ******* TRABAJAR EN UN PROYECTO (EQUIPO)
 
 Exacto, trabajar directamente en la rama `main` o `master` no es una práctica recomendada cuando se trabaja en un proyecto de equipo. La rama `main` o `master` suele utilizarse para reflejar la versión estable del proyecto y no debería contener cambios no probados o en desarrollo.
@@ -181,9 +173,9 @@ Siguiendo este flujo de trabajo y estas buenas prácticas, podrás colaborar de 
 
 ***** PRIMEROS PASOS CON GIT (Configurando GIT - 1ra Vez)
 
-1- Configurar Email -> git config --global user.email "josecanahuate05@gmail.com"
+1- Configurar Email -> git config --global user.email "correoexample@gmail.com"
 
-2- Configurar Nombre -> git config --global user.name "Jose Canahuate"
+2- Configurar Nombre -> git config --global user.name "Name Example"
 
 
 
