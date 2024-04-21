@@ -70,6 +70,36 @@ Trabajar en equipo en un proyecto de desarrollo de software requiere una buena c
     git revert <ID_del_commit>
     
 
+** git ignore --> ignorar archivos por ejemplo el .env
+laravel tiene el archivo .env, y en este archivo se coloca informacion sensible,
+por lo que este comando nos ayuda a ignorar este archivo.
+
+en el archivo .gitignore se colocan los archivos que no se desea que se suban o compartan
+si la carpeta ¿.gitignore' no esta, se debe crear.
+
+
+***IGNORAR ARCHIVOS css DENTRO DE UNA carpeta. 'insertar esta linea'
+
+   css/*.css
+
+
+*** IGNORAR TODOS LOS ARCHIVOS CSS MENOS UNO EN especifico
+
+   !css/main.css
+
+
+*** IGNORAR TODOS LOS ARCHIVOS QUE NO SE QUIERA SUBIR
+
+   *.css
+
+
+*** IGNORAR TODOS LOS ARCHIVOS CSS MENOS LOS QUE ESTAN EN UNA subcarpeta
+
+   !css/**/main.css
+
+
+
+
 ### Comandos para la Colaboración:
 
 13. **`git remote`**: Administrar conexiones con repositorios remotos.
