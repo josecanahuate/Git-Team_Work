@@ -533,6 +533,188 @@ e.2) ENVIAR (PUSH) LOS CAMBIOS A LA MISMA RAMA, YA QUE NO SE HA HECHO MERGE
 e.3) EL ADMINISTRADOR REVISARA Y APROBARA O NO.
 
 
+**** ELIMINAR ARCHIVOS (con esta opcion se elimina un archivo del proyecto y del repositorio)
+git rm nombre_del_archivo
+git rm saludo3.html
+
+**** DEJAR DE HACER SEGUIMIENTO A UN ARCHIVO PERO QUE NO SE ELMINE DEL PROYECTO
+(con esta opcion, el archivo no se elimina pero no se sube o no se le da seguimiento)
+git rm --cached nombre_del_archivo
+git rm --cached saludo4.html
+
+
+*** CAMBIAR NOMBRE A UN ARCHIVO 
+Opcion 1 - cambiar nombre, y volver a subir con 'git add .'
+hacer git status y hacer un nuevo commit 
+
+
+Opcion 2 - Renombrar archivo
+
+git mv archivo-a-renombrar nuevo-nombre
+
+   git mv saludo2.html saludo6.html
+
+
+
+**** VER HISTORIAL DE COMMITS - Pasa salir de la interfaz de git log se debe presionar la letra 'q'
+
+- git log
+al ejecutar este comando se muestra el historial de commits, con el ID del commit, el autor, el mensaje, y la fecha.
+los commits se muestran de manera descendente.
+no se veran todos los commits pk estan paginados, para ver los otros commits se debe presionar la flecha hacia abajo.
+
+- git log -p  
+muestra el historial de commits, con los cambios que hemos hecho en cada commit.
+
+- git log --oneline
+muestra el historial de commits en una sola linea, con el ID del commit, el autor, el mensaje, y la fecha.
+
+- git log --stat
+muestra el historial de commits de forma estadistica
++ ->  signo que representa las lineas agregadas '+' de cada commit
+- ->  signo que representa las lineas eliminadas '-' de cada commit
+
+- git log --pretty=format:"%h %an"
+muestra el historial de commits personalizado con:
+ *id
+ *nombre de quien hizo el commit 
+
+- git log --pretty=format:"%h %an %ar: %s"
+muestra el historial de commits personalizado con:
+ *id
+ *nombre de quien hizo el commit 
+ *fecha
+ *mensaje del commit
+
+
+
+****** DESHACER CAMBIOS EN GIT 
+si queremos deshacer un commit, debemos volver a un estado anterior, y para eso debemos hacer un commit con los cambios que queremos conservar.
+
+
+--REVERTIR CAMBIOS
+
+(+Mas recomendado)
+
+//restaurar un archivo en donde hemos eliminado algo o hemos agregado algo que ya no queremos.
+   git restore nombre-del-archivo
+      git restore saludo1.html
+
+
+//RESTAURA TODOS LOS ARCHIVOS QUE HAYAN SIDO ELIMINADOS DESDE EL ULTIMO COMMIT
+ESTO HARA REVERTIR TODOS LOS CAMBIOS QUE HAYAN SIDO HECHOS DESDE EL ULTIMO COMMIT.
+(EL ESTADO DEL PROYECTO VOLVERA A LA NORMALIDAD DEL ULTIMO COMMIT)
+supongamos que hemos hecho un commit, donde modificamos algun archivo o eliminamos algo, pero ahora queremos volver a un estado anterior, donde no hemos hecho ningun cambio.
+   
+   git restore .
+
+
+//SE ELIMINAN TODOS LOS ARCHIVOS NO RASTREADOS
+   git clear -fd
+
+//
+git restore . && git clean -fd
+
+
+//REVERTIR CAMBIOS ACABADOS DE AÑADIR CON git add .
+
+   //se restauran un archivo especifico que ha sido añadidos con git add .   
+   git restore --staged nombre-del-archivo
+
+   //se restauran todos los archivos que han sido añadidos con git add .
+   git restore --staged .
+   
+
+//REVERTIR CAMBIOS ACABADOS DE AÑADIR A UN COMMIT 
+
+   git commit -m "prueba"
+   git log 
+
+   git reset HEAD nombre-del-archivo
+
+
+   git reset HEAD .  
+
+   //REVERTIR CAMBIOS AL PENULTIMO COMMIT 
+   git commit -m "prueba"
+   git log 
+   git reset HEAD~cantidad-de-commits-a-retroceder
+   git reset HEAD~1
+
+
+   //
+   git reset HEAD~1 -> retrocede 1 commit 
+   git reset HEAD~2  -> retrocede 2 commit 
+   git reset HEAD~3 -> retrocede 3 commit 
+   etc...
+
+   ****stage = cola de espera de los archivos que esperan ser subidos
+
+   //elimina el ultimo commit pero mantiene todos los cambios en local y estan agregados en el estado de git
+   git reset --soft HEAD~1 
+
+
+   elimina el ultimo commit pero mantiene todos los cambios en local, pero lo elimina del stage de git
+   git reset --mixed HEAD~1 
+
+
+   ELIMINA todos los cambios DE ultimo commit, LOS ELIMINA DE TODOS LOS LADOS DE local Y REMOTO Y DEL STAGE
+   git reset --hard HEAD~1 
+
+
+   //AHORA SUPONGAMOS QUE YA CREAMOS UN COMMIT, PERO NOS FALTO AGREGAR ALGUN CAMBIO, PERO NO QUEREMOS CREAR UN NUEVO COMMIT SINO QUEREMOS 
+   QUE EL CAMBIO SE ALMACENE EN EL ULTIMO COMMIT SIN CREAR UNO NUEVO.
+
+   git add .
+   git status
+   git commit --amend
+   git commit --amend -m "mensaje"
+
+   
+   //REGRESAR A UN COMMIT EN especifico
+   git log  
+   buscamos el commit y copiamos el hash 
+   git checkout hash-copiado
+
+
+   //REGRESAR A UN COMMIT EN especifico Y ELIMINAR TODOS LOS OTROS
+   git log  
+   buscamos el commit y copiamos el hash 
+   git checkout hash-copiado
+   git reset hash-copiado
+
+
+   //XXXX ELIMINA ABSOLUTAMENTE TODO DE TODOS LOS COMMIT SALTADOS DE TODOS LOS LADOS (DANGERRRR)
+   git reset --hard <ID_del_commit>
+
+
+   EJEMPLO SI TENEMOS 10 COMMITS Y VOLVEMOS AL COMMIT 6, ELIMINARA LOS ARCHIVOS E INFORMACIONES DE LOS ULTIMOS 4 QUE ACABAMOS DE SALTAR
+
+
+
+
+### ETIQUETAS EN GIT (RESALTAR UN COMMIT)
+1. **`git tag`**: Crear una etiqueta.
+   
+   a quien etiquetamos es al commit para esto seguimos estos pasos
+   al momento de añadir nuevos arhivos y creacion de commit:
+
+   //esta etiqueta se le agregara SIEMPRE al ultimo commit
+   git add .
+   git commit -m "septimo commit"
+   git tag -a v1 -m "Este es la version v1"
+
+   
+   //para ver las etiquetas
+   git tag 
+
+   //para ver la etiqueta con el commit
+   git show nombre-etiqueta
+      git show v1
+
+
+
+
 
 ******************************************************************************
 	
